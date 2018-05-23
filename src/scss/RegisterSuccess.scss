@@ -1,0 +1,30 @@
+.registerSuccess {
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  .successHeader {
+    background-image: url("../assets/successHeader.png");
+    background-size: contain;
+    width: 100%;
+    margin-top: 87px;
+    padding-top: 49px;
+    padding-left: 20px;
+    padding-right: 20px;
+    .congrat {
+      font-size: 24px;
+      text-align: center;
+      color: rgb(63, 81, 181);
+    }
+    .congratDetail {
+      font-size: 15px;
+      text-align: center;
+    }
+  }
+  .successImg {
+    width: 206px;
+    height: 228px;
+    display: block;
+    margin: 88px auto 30px;
+  }
+}

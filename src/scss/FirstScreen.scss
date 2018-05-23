@@ -1,0 +1,67 @@
+.ereka {
+  position: absolute;
+  width: 204px;
+  top: 64px;
+  left: 15px;
+}
+
+.firstScreen {
+  background-image: url("../assets/firstScreenBackground.png");
+  height: 100%;
+  width: 100%;
+  color: white;
+  .title {
+    font-size: 36px;
+    margin: 0;
+    position: absolute;
+    top: 157px;
+    left: 16px;
+  }
+
+  .first {
+    font-size: 16px;
+    margin: 0;
+    position: absolute;
+    left: 16px;
+    top: 210px;
+  }
+
+  .second {
+    font-size: 16px;
+    margin: 0;
+    position: absolute;
+    left: 16px;
+    top: 240px;
+  }
+  .btnPart {
+    position: absolute;
+    top: 451px;
+    left: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 92%;
+    bottom: 0;
+    .or {
+      font-size: 15px;
+      margin: 0;
+    }
+    .sign {
+      color: white;
+      font-size: 18px;
+      margin: 0;
+      text-align: center;
+    }
+  }
+  a {
+    width: 100%;
+  }
+}
+
+.backgroundObj {
+  width: 360px;
+  position: absolute;
+  top: 97px;
+  left: 0;
+}

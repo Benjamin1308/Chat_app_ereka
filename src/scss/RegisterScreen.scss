@@ -1,0 +1,33 @@
+.registerImg {
+  width: 86px;
+  margin: 16px auto;
+  display: block;
+}
+.registerScreen {
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  .warn {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  p {
+    color: rgb(48, 49, 55);
+  }
+  .btnPart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height: 185px;
+    bottom: 0;
+    .haveAcc {
+      align-self: flex-start;
+      margin-left: 15px;
+    }
+  }
+  a {
+    width: 100%;
+  }
+}

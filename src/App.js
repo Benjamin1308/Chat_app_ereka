@@ -5,6 +5,7 @@ import FirstScreen from "./containers/FirstScreen";
 import RegisterScreen from "./containers/RegisterScreen";
 import LoginScreen from "./containers/LoginScreen";
 import RegisterSuccess from "./containers/RegisterSuccess";
+import MainScreen from "./containers/MainScreen";
 
 const App = () => (
   <Switch>
@@ -12,6 +13,7 @@ const App = () => (
     <Route path="/register" component={RegisterScreen} />
     <Route path="/login" component={LoginScreen} />
     <Route path="/registersuccess" component={RegisterSuccess} />
+    <Route path="/main" component={MainScreen} />
   </Switch>
 );
 

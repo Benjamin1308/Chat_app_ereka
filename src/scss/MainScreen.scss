@@ -1,0 +1,24 @@
+.navi-bar {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  background-color: rgb(242, 243, 245);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.post-item {
+  width: 48px;
+  height: 48px;
+  margin: 0;
+}

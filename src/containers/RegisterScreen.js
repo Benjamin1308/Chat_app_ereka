@@ -43,6 +43,7 @@ export default class RegisterScreen extends React.Component {
           title="Đăng ký tài khoản"
           backgroundColor="white"
           color="rgb(48, 49, 55)"
+          align="center"
         />
         <img src={registerImg} className="registerImg" alt="Register img" />
         <p className="warn">

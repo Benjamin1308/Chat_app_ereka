@@ -1,0 +1,55 @@
+.requestItem {
+  height: 114px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-bottom: solid 1px rgb(230, 230, 230);
+  .reqInfo {
+    display: flex;
+    justify-content: flex-start;
+    height: 35px;
+
+    .avatar {
+      width: 35px;
+      margin-left: 10px;
+      margin-right: 12px;
+    }
+    .reqDetail {
+      font-size: 16px;
+      .name {
+        color: rgb(48, 49, 55);
+      }
+      .saying {
+        color: rgb(94, 96, 112);
+      }
+      .time {
+        font-size: 12px;
+        color: rgb(137, 139, 155);
+      }
+    }
+  }
+  .option {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 14px;
+    color: rgb(63, 81, 181);
+    .l-btn {
+      margin-left: 35px;
+    }
+    .button {
+      color: rgb(63, 81, 181);
+      height: 32px;
+      border-radius: 16px;
+      background-color: white;
+      border: solid 1px rgb(214, 218, 223);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding-right: 13px;
+    }
+    .button:focus {
+      outline: 0 !important;
+    }
+  }
+}

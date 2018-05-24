@@ -1,0 +1,25 @@
+.blockItem {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 64px;
+  padding: 0 15px;
+  border-bottom: solid 1px rgb(236, 238, 240);
+  .blockMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .name {
+      font-size: 15px;
+      color: rgb(48, 49, 55);
+    }
+    .unblock {
+      font-size: 14px;
+      color: rgb(63, 81, 181);
+    }
+  }
+  .time {
+    font-size: 12px;
+    color: rgb(137, 139, 155);
+  }
+}

@@ -23,6 +23,7 @@ export default class LoginScreen extends React.Component {
           title="Đăng nhập"
           backgroundColor="white"
           color="rgb(48, 49, 55)"
+          align="center"
         />
         <img src={loginImg} className="loginImg" alt="Login img" />
         <form>
@@ -44,7 +45,7 @@ export default class LoginScreen extends React.Component {
             <br />
           </div>
 
-          <Link to="/">
+          <Link to="/main">
             <LongButton
               content="Đăng nhập"
               backgroundColor="rgb(63,81,181)"

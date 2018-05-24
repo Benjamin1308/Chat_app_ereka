@@ -14,7 +14,7 @@ const RegisterSuccess = props => {
         </p>
       </div>
       <img className="successImg" src={success} alt="success" />
-      <Link to=" ">
+      <Link to="/main">
         <LongButton content="Bắt đầu" backgroundColor="rgb(63,81,181)" />
       </Link>
     </div>

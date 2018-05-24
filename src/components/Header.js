@@ -16,7 +16,9 @@ const Header = props => {
     >
       <img className="back" src={backDark} alt="<" onClick={history.goBack} />
 
-      {props.title}
+      <p className="title" style={{ textAlign: props.align }}>
+        {props.title}
+      </p>
       {option}
     </div>
   );

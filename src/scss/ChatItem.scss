@@ -1,0 +1,36 @@
+.chatItem {
+  height: 72px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: solid 1px rgb(230, 230, 230);
+  .avatar {
+    margin: 18px 12px;
+    width: 35px;
+    height: 35px;
+  }
+  .msgContainer {
+    flex-grow: 1;
+    height: 40px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .msgInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-right: 15px;
+      .name {
+        font-size: 16px;
+        color: rgb(48, 49, 55);
+      }
+      .time {
+        font-size: 12px;
+      }
+    }
+    .body {
+      font-size: 13px;
+    }
+  }
+}

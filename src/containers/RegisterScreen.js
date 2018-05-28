@@ -44,6 +44,7 @@ export default class RegisterScreen extends React.Component {
           backgroundColor="white"
           color="rgb(48, 49, 55)"
           align="center"
+          back="dark"
         />
         <img src={registerImg} className="registerImg" alt="Register img" />
         <p className="warn">

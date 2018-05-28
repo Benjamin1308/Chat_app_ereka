@@ -1,0 +1,36 @@
+.stopBlockScreen {
+  background-color: rgba(63, 81, 181, 0.7);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  .stopBlockPopup {
+    background-color: white;
+    width: 345px;
+    height: 176px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 189px;
+    .popupTit {
+      color: rgb(94, 96, 112);
+      margin: 16px 164px 16px 16px;
+    }
+    .popupContent {
+      color: rgb(137, 139, 155);
+      margin: 0 16px 18px;
+    }
+    .btnGroup {
+      display: flex;
+      justify-content: flex-end;
+    }
+    button {
+      color: rgb(63, 81, 181);
+      border: none;
+      background-color: white;
+      margin-right: 16px;
+      margin-top: 10px;
+    }
+    button:focus {
+      outline: 0;
+    }
+  }
+}

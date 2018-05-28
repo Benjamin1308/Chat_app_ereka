@@ -6,6 +6,9 @@ import RegisterScreen from "./containers/RegisterScreen";
 import LoginScreen from "./containers/LoginScreen";
 import RegisterSuccess from "./containers/RegisterSuccess";
 import MainScreen from "./containers/MainScreen";
+import StopBlockScreen from "./containers/StopBlockScreen";
+import ChatRequestDetail from "./containers/ChatRequestDetail";
+import MessageScreen from "./containers/MessageScreen";
 
 const App = () => (
   <Switch>
@@ -14,6 +17,9 @@ const App = () => (
     <Route path="/login" component={LoginScreen} />
     <Route path="/registersuccess" component={RegisterSuccess} />
     <Route path="/main" component={MainScreen} />
+    <Route path="/stop-block/:name" component={StopBlockScreen} />
+    <Route path="/request-detail/:id" component={ChatRequestDetail} />
+    <Route path="/message" component={MessageScreen} />
   </Switch>
 );
 

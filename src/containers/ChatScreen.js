@@ -44,7 +44,14 @@ export default class ChatScreen extends React.Component {
       active === "dang_chat" ? (
         <VerticalList type="chat" list={mockDataChatMessage} />
       ) : active === "yeu_cau_chat" ? (
-        <VerticalList type="request" list={mockDataChatRequest} />
+        <div>
+          <div className="noOfReq">
+            <div className="noOfReqMsg">
+              Bạn nhận được {mockDataChatRequest.length} yêu cầu chat
+            </div>
+          </div>
+          <VerticalList type="request" list={mockDataChatRequest} />
+        </div>
       ) : (
         <div>
           <div className="blockHeader">

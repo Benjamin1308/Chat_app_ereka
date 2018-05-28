@@ -24,6 +24,7 @@ export default class LoginScreen extends React.Component {
           backgroundColor="white"
           color="rgb(48, 49, 55)"
           align="center"
+          back="dark"
         />
         <img src={loginImg} className="loginImg" alt="Login img" />
         <form>

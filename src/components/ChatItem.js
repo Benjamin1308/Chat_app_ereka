@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import avatarDefault from "../assets/avatar.png";
 import "../scss/ChatItem.scss";
 import doubletick from "../assets/doubletick.png";
@@ -17,13 +18,26 @@ const ChatItem = props => {
     );
   const statusRender = status === "MSG_PENDING" ? <span /> : statusSymbol;
   return (
-    <div className="chatItem">
-      <img className="avatar" src={avatar || avatarDefault} alt="avatar" />
-      <div className="msgContainer">
-        <div className="msgInfo">
-          <p className="name">{name}</p>
-          <p
-            className="time"
+    <Link to="/message">
+      <div className="chatItem">
+        <img className="avatar" src={avatar || avatarDefault} alt="avatar" />
+        <div className="msgContainer">
+          <div className="msgInfo">
+            <p className="name">{name}</p>
+            <p
+              className="time"
+              style={{
+                color:
+                  status !== "MSG_PENDING"
+                    ? "rgb(137,139,155)"
+                    : "rgb(48, 49, 55)"
+              }}
+            >
+              {time}
+            </p>
+          </div>
+          <div
+            className="body"
             style={{
               color:
                 status !== "MSG_PENDING"
@@ -31,21 +45,12 @@ const ChatItem = props => {
                   : "rgb(48, 49, 55)"
             }}
           >
-            {time}
-          </p>
-        </div>
-        <div
-          className="body"
-          style={{
-            color:
-              status !== "MSG_PENDING" ? "rgb(137,139,155)" : "rgb(48, 49, 55)"
-          }}
-        >
-          {statusRender}
-          {" " + body}
+            {statusRender}
+            {" " + body}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 export default ChatItem;

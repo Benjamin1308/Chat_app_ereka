@@ -39,12 +39,14 @@ export const mockDataChatMessage = [
 export const mockDataChatRequest = [
   {
     id: "1",
+    userId: "2",
     name: "Thùy Dung",
     requestTime: "5h trước",
     requestMessage: ""
   },
   {
     id: "2",
+    userId: "1",
     name: "Lê Bảo Hân",
     requestTime: "5h trước",
     requestMessage:
@@ -72,5 +74,57 @@ export const mockDataBlock = [
     id: "4",
     name: "Lê Hoàng",
     from: "27/03 2018"
+  }
+];
+
+export const mockDataUser = [
+  {
+    id: "1",
+    name: "Lê Bảo Hân",
+    follower: "27",
+    following: "198",
+    description: "Chuyên gia sử học"
+  },
+  {
+    id: "2",
+    name: "Thùy Dung",
+    follower: "25",
+    following: "113",
+    description: "Chuyên gia tâm lý tuổi teen"
+  }
+];
+
+export const mockDataMessage = [
+  {
+    id: "1",
+    type: "receive",
+    message:
+      "Bạn hoàn toàn có thể rửa mặt bằng nước muối 0.5%. Nếu có thể, bạn làm ấm một chút bằng lò vi sóng thì sẽ còn tốt hơn nữa.",
+    time: "09:14 am"
+  },
+  {
+    id: "2",
+    type: "receive",
+    message:
+      "Khi mà user chat làm nhiều dòng rồi ấn enter theo thói quen thì hệ thống tự hộp lại trong một hợp thoại",
+    time: "09:16 am"
+  },
+  {
+    id: "3",
+    type: "send",
+    message: "Đây là nội dung chat của người dùng, không hiện avatar",
+    status: "seen"
+  },
+  {
+    id: "4",
+    type: "send",
+    message: "Khi đã nhận nhưng chưa xem",
+    status: "sent"
+  },
+  {
+    id: "5",
+    type: "send",
+    message: "Tin nhắn ko gửi được",
+    status: "error"
   }
 ];

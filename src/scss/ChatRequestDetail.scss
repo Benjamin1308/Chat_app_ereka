@@ -1,0 +1,99 @@
+.chatRequestDetail {
+  height: 100%;
+  p {
+    margin: 0;
+  }
+  .userInfoContainer {
+    height: 262px;
+    border-bottom: solid 1px grey;
+    -webkit-box-shadow: 0px 10px 6px 0px rgba(115, 115, 115, 1);
+    -moz-box-shadow: 0px 10px 6px 0px rgba(115, 115, 115, 1);
+    box-shadow: 0px 10px 6px 0px rgba(115, 115, 115, 1);
+    position: relative;
+    z-index: 10;
+    .ava-follow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 96px;
+      margin: 20px 33px 12px 11px;
+      .bigAvatar {
+        width: 96px;
+      }
+      .followImg {
+        width: 94px;
+      }
+    }
+    .userInfo {
+      margin-left: 11px;
+      .name {
+        font-size: 24px;
+        color: rgb(48, 49, 55);
+      }
+      .description {
+        font-size: 13px;
+        color: rgb(137, 139, 155);
+      }
+      .followGroup {
+        font-size: 14px;
+        color: rgb(137, 139, 155);
+        display: flex;
+        margin-top: 19px;
+        margin-bottom: 26px;
+        .followingBox {
+          margin-left: 50px;
+        }
+        .follower,
+        .following {
+          font-size: 20px;
+          color: black;
+        }
+      }
+    }
+
+    .reqInfo {
+      height: 400px;
+      background-color: rgb(246, 248, 249);
+      display: block;
+      .reqDetail {
+        font-size: 16px;
+
+        .request {
+          padding: 40px;
+          text-align: center;
+          .name {
+            color: rgb(48, 49, 55);
+          }
+          .saying {
+            color: rgb(94, 96, 112);
+          }
+        }
+      }
+      .option {
+        margin-top: 65px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 14px;
+        color: rgb(63, 81, 181);
+        .l-btn {
+          margin-left: -10px;
+        }
+        .button {
+          color: rgb(63, 81, 181);
+          height: 32px;
+          border-radius: 16px;
+          background-color: white;
+          border: solid 1px rgb(214, 218, 223);
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          padding-right: 13px;
+        }
+        .button:focus {
+          outline: 0 !important;
+        }
+      }
+    }
+  }
+}

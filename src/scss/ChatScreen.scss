@@ -44,4 +44,16 @@
       margin: 0;
     }
   }
+  .noOfReq {
+    background-color: rgb(230, 230, 230);
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .noOfReqMsg {
+    font-size: 14px;
+    margin-left: 15px;
+    color: rgb(48, 49, 55);
+  }
 }

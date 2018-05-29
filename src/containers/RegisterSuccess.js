@@ -9,7 +9,7 @@ const RegisterSuccess = props => (
     <div className="successHeader">
       <p className="congrat">Đăng ký thành công!</p>
       <p className="congratDetail">
-          Dòng thông tin chúc mừng người dùng đã đăng ký tài khoản thành công.
+        Dòng thông tin chúc mừng người dùng đã đăng ký tài khoản thành công.
       </p>
     </div>
     <img className="successImg" src={success} alt="success" />

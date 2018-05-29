@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import configureStore from "./store/configureStore";
-import "./index.scss";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
-import "./constants/firebase";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from './store/configureStore';
+import './index.scss';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './constants/firebase';
 
 const { store } = configureStore();
 
@@ -18,5 +18,5 @@ const Root = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+ReactDOM.render(<Root />, document.getElementById('root'));
 registerServiceWorker();

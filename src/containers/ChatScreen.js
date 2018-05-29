@@ -37,30 +37,33 @@ export default class ChatScreen extends React.Component {
   };
   renderTabBar = active => (
     <div className="tabBar">
-      <p
+      <a
+        href="/#"
         style={{
           color: active === 'dang_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
         onClick={this.chattingClick}
       >
         ĐANG CHAT
-      </p>
-      <p
+      </a>
+      <a
+        href="/#"
         style={{
           color: active === 'yeu_cau_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
         onClick={this.requestClick}
       >
         YÊU CẦU CHAT
-      </p>
-      <p
+      </a>
+      <a
+        href="/#"
         style={{
           color: active === 'ds_chan' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
         onClick={this.blockClick}
       >
         DS. CHẶN
-      </p>
+      </a>
     </div>
   );
   renderChatHeader = () => (
@@ -73,9 +76,20 @@ export default class ChatScreen extends React.Component {
   );
   render() {
     const { active, find } = this.state;
-    const contentRender =
-      active === 'dang_chat' ? (
-        mockDataChatRequest.length > 0 ? (
+    let contentRender = (
+      <div className="contentRender">
+        <div className="blockHeader">
+          <p className="add">THÊM</p>
+          <p className="addMsg">Bạn có thể thêm người bạn không muốn chat vào danh sách này</p>
+        </div>
+        <div className="divider" style={{ height: '4px' }} />
+        <FindComponent value={find} placeholder="tìm kiếm hồ sơ" handleChange={this.handleChange} />
+        <VerticalList type="block" list={mockDataBlock} />
+      </div>
+    );
+    if (active === 'dang_chat') {
+      if (mockDataChatRequest.length > 0) {
+        contentRender = (
           <div className="contentRender">
             <div className="chatReqHeader">
               <div>Yêu cầu chat</div>
@@ -87,10 +101,10 @@ export default class ChatScreen extends React.Component {
             </div>
             <VerticalList type="chat" list={mockDataChatMessage} />
           </div>
-        ) : (
-          <VerticalList type="chat" list={mockDataChatMessage} />
-        )
-      ) : active === 'yeu_cau_chat' ? (
+        );
+      } else contentRender = <VerticalList type="chat" list={mockDataChatMessage} />;
+    } else if (active === 'yeu_cau_chat') {
+      contentRender = (
         <div className="contentRender">
           <div className="noOfReq">
             <div className="noOfReqMsg">
@@ -99,21 +113,8 @@ export default class ChatScreen extends React.Component {
           </div>
           <VerticalList type="request" list={mockDataChatRequest} />
         </div>
-      ) : (
-        <div className="contentRender">
-          <div className="blockHeader">
-            <p className="add">THÊM</p>
-            <p className="addMsg">Bạn có thể thêm người bạn không muốn chat vào danh sách này</p>
-          </div>
-          <div className="divider" style={{ height: '4px' }} />
-          <FindComponent
-            value={find}
-            placeholder="tìm kiếm hồ sơ"
-            handleChange={this.handleChange}
-          />
-          <VerticalList type="block" list={mockDataBlock} />
-        </div>
       );
+    }
     return (
       <div className="chatScreen">
         {this.renderChatHeader()}

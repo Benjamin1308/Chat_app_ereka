@@ -1,18 +1,11 @@
-import {
-  LOGIN_PENDING,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  SIGN_UP_PENDING
-} from "../actions/actionTypes";
+import { LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SIGN_UP_PENDING } from '../actions/actionTypes';
 
-const login = (
-  state = {
-    isLoggingIn: false,
-    token: "",
-    username: ""
-  },
-  action
-) => {
+const login = (state = {
+  isLoggingIn: false,
+  token: '',
+  username: '',
+},
+action) => {
   switch (action.type) {
     case LOGIN_PENDING:
       return { ...state, isLoggingIn: true };
@@ -20,7 +13,7 @@ const login = (
       return {
         isLoggingIn: false,
         token: action.payload.token,
-        username: action.payload.username
+        username: action.payload.username,
       };
     case LOGIN_FAIL:
       return { ...state, isLoggingIn: false };

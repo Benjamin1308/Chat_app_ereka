@@ -5,6 +5,7 @@ import InputItem from '../components/InputItem';
 import LongButton from '../components/LongButton';
 import FBButton from '../components/FBButton';
 import loginImg from '../assets/login.jpg';
+
 import '../scss/LoginScreen.scss';
 
 export default class LoginScreen extends React.Component {
@@ -15,7 +16,16 @@ export default class LoginScreen extends React.Component {
       password: '',
     };
   }
-
+  handleUsername = (e) => {
+    this.setState({
+      username: e.target.value,
+    });
+  };
+  handlePass = (e) => {
+    this.setState({
+      password: e.target.value,
+    });
+  };
   render() {
     return (
       <div className="loginScreen">
@@ -30,6 +40,7 @@ export default class LoginScreen extends React.Component {
         <form>
           <InputItem
             label="Email/Số điện thoại"
+            value={this.state.username}
             type="text"
             handleChange={this.handleUsername}
             id="username"
@@ -37,6 +48,7 @@ export default class LoginScreen extends React.Component {
           <InputItem
             label="Mật khẩu"
             type="password"
+            value={this.state.password}
             handleChange={this.handlePass}
             id="password"
           />

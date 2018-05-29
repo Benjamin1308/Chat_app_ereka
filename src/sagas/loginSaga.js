@@ -1,11 +1,6 @@
-import { takeLatest, put, call } from "redux-saga/effects";
-import firebase from "firebase";
-import {
-  loginPending,
-  loginSuccess,
-  loginFail,
-  LOGIN_REQUEST
-} from "../actions/actionTypes";
+import { takeLatest, put, call } from 'redux-saga/effects';
+import firebase from 'firebase';
+import { loginPending, loginSuccess, loginFail, LOGIN_REQUEST } from '../actions/actionTypes';
 
 function* authorizeWithFirebase({ payload }) {
   const { email, password } = payload;
@@ -16,10 +11,10 @@ function* authorizeWithFirebase({ payload }) {
       // in this case, firebase.auth() is the context for signInWithEmailAndPassword
       [firebase.auth(), firebase.auth().signInWithEmailAndPassword],
       email, // arguments are passed seperately
-      password
+      password,
     );
     const usernameRef = firebase.database().ref(`users/${user.uid}/name`);
-    const dataSnapshot = yield call([usernameRef, usernameRef.once], "value");
+    const dataSnapshot = yield call([usernameRef, usernameRef.once], 'value');
     yield put(loginSuccess(user.uid, dataSnapshot.val()));
   } catch (e) {
     yield put(loginFail(e.message));

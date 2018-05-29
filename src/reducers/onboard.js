@@ -1,4 +1,4 @@
-import { ONBOARD } from "../actions/actionTypes";
+import { ONBOARD } from '../actions/actionTypes';
 
 const onboard = (state = false, action) => {
   switch (action.type) {

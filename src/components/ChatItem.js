@@ -1,22 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import avatarDefault from "../assets/avatar.png";
-import "../scss/ChatItem.scss";
-import doubletick from "../assets/doubletick.png";
-import tick from "../assets/tick.png";
-import error from "../assets/error.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import avatarDefault from '../assets/avatar.png';
+import '../scss/ChatItem.scss';
+import doubletick from '../assets/doubletick.png';
+import tick from '../assets/tick.png';
+import error from '../assets/error.png';
 
-const ChatItem = props => {
-  const { avatar, name, id, time, body, status } = props.chat;
-  const statusSymbol =
-    status === "MSG_SENT" ? (
-      <img src={tick} alt="tick" style={{ width: "9px" }} />
-    ) : status === "MSG_SEEN" ? (
-      <img src={doubletick} alt="tick" style={{ width: "13.8px" }} />
-    ) : (
-      <img src={error} alt="tick" style={{ width: "8px" }} />
-    );
-  const statusRender = status === "MSG_PENDING" ? <span /> : statusSymbol;
+const ChatItem = (props) => {
+  const {
+    avatar, name, id, time, body, status,
+  } = props.chat;
+  let statusSymbol = <img src={error} alt="tick" style={{ width: '8px' }} />;
+  if (status === 'MSG_SENT') statusSymbol = <img src={tick} alt="tick" style={{ width: '9px' }} />;
+  else if (status === 'MSG_SEEN') { statusSymbol = <img src={doubletick} alt="tick" style={{ width: '13.8px' }} />; }
+  const statusRender = status === 'MSG_PENDING' ? <span /> : statusSymbol;
   return (
     <Link to="/message">
       <div className="chatItem">
@@ -27,10 +24,7 @@ const ChatItem = props => {
             <p
               className="time"
               style={{
-                color:
-                  status !== "MSG_PENDING"
-                    ? "rgb(137,139,155)"
-                    : "rgb(48, 49, 55)"
+                color: status !== 'MSG_PENDING' ? 'rgb(137,139,155)' : 'rgb(48, 49, 55)',
               }}
             >
               {time}
@@ -39,14 +33,11 @@ const ChatItem = props => {
           <div
             className="body"
             style={{
-              color:
-                status !== "MSG_PENDING"
-                  ? "rgb(137,139,155)"
-                  : "rgb(48, 49, 55)"
+              color: status !== 'MSG_PENDING' ? 'rgb(137,139,155)' : 'rgb(48, 49, 55)',
             }}
           >
             {statusRender}
-            {" " + body}
+            {` ${body}`}
           </div>
         </div>
       </div>

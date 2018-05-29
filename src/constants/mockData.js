@@ -126,5 +126,53 @@ export const mockDataMessage = [
     type: "send",
     message: "Tin nhắn ko gửi được",
     status: "error"
+  },
+  {
+    id: "2",
+    type: "receive",
+    message:
+      "Khi mà user chat làm nhiều dòng rồi ấn enter theo thói quen thì hệ thống tự hộp lại trong một hợp thoại",
+    time: "09:16 am"
+  },
+  {
+    id: "3",
+    type: "send",
+    message: "Đây là nội dung chat của người dùng, không hiện avatar",
+    status: "seen"
+  },
+  {
+    id: "2",
+    type: "receive",
+    message:
+      "Khi mà user chat làm nhiều dòng rồi ấn enter theo thói quen thì hệ thống tự hộp lại trong một hợp thoại",
+    time: "09:16 am"
+  },
+  {
+    id: "3",
+    type: "send",
+    message: "Đây là nội dung chat của người dùng, không hiện avatar",
+    status: "seen"
+  }
+];
+export const mockDataContact = [
+  {
+    id: "1",
+    name: "Kiên Nguyễn",
+    description: "Nhân viên tự do"
+  },
+  {
+    id: "2",
+    name: "Kiên trần",
+    description: "Giáo sư sử học"
+  },
+  {
+    id: "3",
+    name: "Kiên Phạm",
+    description: "Tiêu đề"
+  },
+  {
+    id: "4",
+    name: "Kiên Nguyễn",
+    description: "Nhân viên tự do"
   }
 ];

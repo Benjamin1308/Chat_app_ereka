@@ -1,5 +1,35 @@
 .messageScreen {
+  height: 100%;
   .messageContainer {
+    padding-top: 16px;
+    height: 573px;
+    overflow: scroll;
     background-color: rgb(246, 248, 249);
+  }
+  .inputContainer {
+    height: 50px;
+
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    .send {
+      width: 24px;
+      margin-right: 15px;
+    }
+    .chat {
+      flex-grow: 1;
+      margin-left: 8px;
+      margin-right: 8px;
+      height: 36px;
+      border: solid 1px rgb(236, 238, 240);
+      border-radius: 18px;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    .chat:focus {
+      outline: none;
+    }
   }
 }

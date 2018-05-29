@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Header from "../components/Header";
-import { mockDataUser, mockDataChatRequest } from "../constants/mockData";
-import bigAvatar from "../assets/bigAvatar.png";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Header from '../components/Header';
+import { mockDataUser, mockDataChatRequest } from '../constants/mockData';
+import bigAvatar from '../assets/bigAvatar.png';
 
-import follow from "../assets/follow.png";
-import tick from "../assets/thintick.png";
-import error from "../assets/checkNo.png";
-import "../scss/ChatRequestDetail.scss";
-import MessageItem from "../components/MessageItem";
+import follow from '../assets/follow.png';
+import tick from '../assets/thintick.png';
+import error from '../assets/checkNo.png';
+import '../scss/ChatRequestDetail.scss';
+import MessageItem from '../components/MessageItem';
 
 export default class ChatRequestDetail extends React.Component {
   static propTypes = {};
@@ -18,13 +18,9 @@ export default class ChatRequestDetail extends React.Component {
   }
 
   render() {
-    const request = mockDataChatRequest.filter(req => {
-      return req.id === this.props.match.params.id;
-    })[0];
+    const request = mockDataChatRequest.filter(req => req.id === this.props.match.params.id)[0];
     console.log(request);
-    const user = mockDataUser.filter(userData => {
-      return userData.id === request.userId;
-    })[0];
+    const user = mockDataUser.filter(userData => userData.id === request.userId)[0];
     console.log(user);
     return (
       <div className="chatRequestDetail">
@@ -34,7 +30,7 @@ export default class ChatRequestDetail extends React.Component {
           color="white"
           align="center"
           back="white"
-          option={true}
+          option
         />
         <div className="userInfoContainer">
           <div className="ava-follow">
@@ -58,12 +54,13 @@ export default class ChatRequestDetail extends React.Component {
           <div className="reqInfo">
             <div className="reqDetail">
               <div className="request">
-                <span className="name">{request.name + " "}</span>
+                <span className="name">{`${request.name} `}</span>
                 <span className="saying">muốn được chat với bạn</span>
               </div>
               <MessageItem
-                msg={request.requestMessage}
-                time={request.requestTime}
+                message={{
+ message: 'lorem ipsum', type: 'receive', id: '1', time: '9.00 am',
+}}
               />
             </div>
             <div className="option">
@@ -72,9 +69,9 @@ export default class ChatRequestDetail extends React.Component {
                   src={tick}
                   alt="accept"
                   style={{
-                    width: "16px",
-                    marginLeft: "8px",
-                    marginRight: "8px"
+                    width: '16px',
+                    marginLeft: '8px',
+                    marginRight: '8px',
                   }}
                 />Chấp nhận
               </button>
@@ -83,9 +80,9 @@ export default class ChatRequestDetail extends React.Component {
                   src={error}
                   alt="no"
                   style={{
-                    width: "16px",
-                    marginLeft: "8px",
-                    marginRight: "8px"
+                    width: '16px',
+                    marginLeft: '8px',
+                    marginRight: '8px',
                   }}
                 />Từ chối
               </button>

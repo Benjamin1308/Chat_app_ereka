@@ -1,4 +1,7 @@
 .chatScreen {
+  .contentRender {
+    overflow: scroll;
+  }
   .chatHeader {
     background-color: rgb(63, 81, 181);
     display: flex;
@@ -55,5 +58,32 @@
     font-size: 14px;
     margin-left: 15px;
     color: rgb(48, 49, 55);
+  }
+  .chatReqHeader {
+    display: flex;
+    justify-content: space-between;
+    height: 44px;
+    align-items: center;
+    border-bottom: solid 1px rgb(230, 230, 230);
+    font-size: 14px;
+    color: rgb(94, 96, 112);
+    padding: 15px;
+    .numberOfReq {
+      background-color: rgb(245, 166, 35);
+      padding-left: 8px;
+      padding-right: 8px;
+      border-radius: 12px;
+      color: white;
+    }
+  }
+  .chattingHeader {
+    display: flex;
+    justify-content: flex-start;
+    height: 44px;
+    align-items: center;
+    border-bottom: solid 1px rgb(230, 230, 230);
+    font-size: 14px;
+    color: rgb(94, 96, 112);
+    padding: 15px;
   }
 }

@@ -16,14 +16,16 @@
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
     "eslint": "4.10.0",
+    "eslint-config-import": "^0.13.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
+    "eslint-plugin-react-redux": "^2.3.0",
+    "eslint-plugin-redux-saga": "^0.8.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
+    "firebase": "^5.0.4",
+    "flow": "^0.2.3",
     "fs-extra": "3.0.1",
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
@@ -36,7 +38,10 @@
     "react": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
@@ -94,7 +99,12 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
     "node-sass": "^4.9.0",
+    "prettier-eslint": "^8.8.1",
     "sass-loader": "^7.0.1"
   }
 }

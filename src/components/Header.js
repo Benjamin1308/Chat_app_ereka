@@ -7,7 +7,12 @@ import optionImg from "../assets/option.png";
 
 const Header = props => {
   const option = props.option ? (
-    <img src={optionImg} className="placeholder" alt="option" />
+    <img
+      src={optionImg}
+      className="placeholder"
+      alt="option"
+      onClick={props.option}
+    />
   ) : (
     <div className="placeholder" />
   );

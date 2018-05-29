@@ -1,0 +1,22 @@
+.messageSetting {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    border-top: solid 1px rgb(236, 238, 240);
+    img {
+      margin-left: 15px;
+    }
+    span {
+      margin-left: 11px;
+      font-size: 14px;
+      color: rgb(48, 49, 55);
+    }
+  }
+}

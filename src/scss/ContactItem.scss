@@ -1,0 +1,22 @@
+.contactItem {
+  margin-left: 15px;
+  margin-bottom: 10px;
+  height: 40px;
+  display: table;
+  border-radius: 20px;
+  border: solid 1px rgb(236, 238, 240);
+  font-size: 14px;
+  padding: 6px;
+  img {
+    width: 28px;
+    margin-right: 10px;
+  }
+  .name {
+    color: rgb(48, 49, 55);
+    margin-right: 10px;
+  }
+  .description {
+    color: rgb(137, 139, 155);
+    margin-right: 10px;
+  }
+}

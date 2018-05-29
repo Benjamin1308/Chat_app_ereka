@@ -9,6 +9,7 @@ import MainScreen from "./containers/MainScreen";
 import StopBlockScreen from "./containers/StopBlockScreen";
 import ChatRequestDetail from "./containers/ChatRequestDetail";
 import MessageScreen from "./containers/MessageScreen";
+import CreateNewChat from "./containers/CreateNewChat";
 
 const App = () => (
   <Switch>
@@ -20,6 +21,7 @@ const App = () => (
     <Route path="/stop-block/:name" component={StopBlockScreen} />
     <Route path="/request-detail/:id" component={ChatRequestDetail} />
     <Route path="/message" component={MessageScreen} />
+    <Route path="/new-chat" component={CreateNewChat} />
   </Switch>
 );
 

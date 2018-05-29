@@ -6,6 +6,7 @@ const LongButton = props => {
     <button
       className="longBtn"
       style={{ backgroundColor: props.backgroundColor }}
+      onClick={props.onClick}
     >
       {props.content}
     </button>

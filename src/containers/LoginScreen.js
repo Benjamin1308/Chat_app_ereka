@@ -1,18 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import InputItem from "../components/InputItem";
-import LongButton from "../components/LongButton";
-import FBButton from "../components/FBButton";
-import loginImg from "../assets/login.jpg";
-import "../scss/LoginScreen.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import InputItem from '../components/InputItem';
+import LongButton from '../components/LongButton';
+import FBButton from '../components/FBButton';
+import loginImg from '../assets/login.jpg';
+import '../scss/LoginScreen.scss';
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     };
   }
 

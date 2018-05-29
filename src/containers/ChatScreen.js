@@ -1,50 +1,97 @@
-import React from "react";
-import newChat from "../assets/newChat.png";
-import "../scss/ChatScreen.scss";
-import {
-  mockDataChatMessage,
-  mockDataChatRequest,
-  mockDataBlock
-} from "../constants/mockData";
-import VerticalList from "../components/VerticalList";
-import FindComponent from "../components/FindComponent";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import newChat from '../assets/newChat.png';
+import '../scss/ChatScreen.scss';
+import { mockDataChatMessage, mockDataChatRequest, mockDataBlock } from '../constants/mockData';
+import VerticalList from '../components/VerticalList';
+import FindComponent from '../components/FindComponent';
 
 export default class ChatScreen extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
     this.state = {
-      active: "dang_chat",
-      find: ""
+      active: 'dang_chat',
+      find: '',
     };
   }
   chattingClick = () => {
     this.setState({
-      active: "dang_chat"
+      active: 'dang_chat',
     });
   };
   requestClick = () => {
     this.setState({
-      active: "yeu_cau_chat"
+      active: 'yeu_cau_chat',
     });
   };
   blockClick = () => {
     this.setState({
-      active: "ds_chan"
+      active: 'ds_chan',
     });
   };
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
-      find: e.target.value
+      find: e.target.value,
     });
   };
+  renderTabBar = active => (
+    <div className="tabBar">
+      <p
+        style={{
+          color: active === 'dang_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+        }}
+        onClick={this.chattingClick}
+      >
+        ĐANG CHAT
+      </p>
+      <p
+        style={{
+          color: active === 'yeu_cau_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+        }}
+        onClick={this.requestClick}
+      >
+        YÊU CẦU CHAT
+      </p>
+      <p
+        style={{
+          color: active === 'ds_chan' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+        }}
+        onClick={this.blockClick}
+      >
+        DS. CHẶN
+      </p>
+    </div>
+  );
+  renderChatHeader = () => (
+    <div className="chatHeader">
+      <p>Chat</p>
+      <Link to="/new-chat">
+        <img src={newChat} alt="new chat" />
+      </Link>
+    </div>
+  );
   render() {
     const { active, find } = this.state;
     const contentRender =
-      active === "dang_chat" ? (
-        <VerticalList type="chat" list={mockDataChatMessage} />
-      ) : active === "yeu_cau_chat" ? (
-        <div>
+      active === 'dang_chat' ? (
+        mockDataChatRequest.length > 0 ? (
+          <div className="contentRender">
+            <div className="chatReqHeader">
+              <div>Yêu cầu chat</div>
+              <div className="numberOfReq">{mockDataChatRequest.length}</div>
+            </div>
+            <VerticalList type="request" list={[mockDataChatRequest[0]]} />
+            <div className="chattingHeader">
+              <div>Đang chat</div>
+            </div>
+            <VerticalList type="chat" list={mockDataChatMessage} />
+          </div>
+        ) : (
+          <VerticalList type="chat" list={mockDataChatMessage} />
+        )
+      ) : active === 'yeu_cau_chat' ? (
+        <div className="contentRender">
           <div className="noOfReq">
             <div className="noOfReqMsg">
               Bạn nhận được {mockDataChatRequest.length} yêu cầu chat
@@ -53,14 +100,12 @@ export default class ChatScreen extends React.Component {
           <VerticalList type="request" list={mockDataChatRequest} />
         </div>
       ) : (
-        <div>
+        <div className="contentRender">
           <div className="blockHeader">
             <p className="add">THÊM</p>
-            <p className="addMsg">
-              Bạn có thể thêm người bạn không muốn chat vào danh sách này
-            </p>
+            <p className="addMsg">Bạn có thể thêm người bạn không muốn chat vào danh sách này</p>
           </div>
-          <div className="divider" style={{ height: "4px" }} />
+          <div className="divider" style={{ height: '4px' }} />
           <FindComponent
             value={find}
             placeholder="tìm kiếm hồ sơ"
@@ -71,41 +116,8 @@ export default class ChatScreen extends React.Component {
       );
     return (
       <div className="chatScreen">
-        <div className="chatHeader">
-          <p>Chat</p>
-          <img src={newChat} alt="new chat" />
-        </div>
-        <div className="tabBar">
-          <p
-            style={{
-              color:
-                active === "dang_chat" ? "rgb(63,81,181)" : "rgb(162,170,176)"
-            }}
-            onClick={this.chattingClick}
-          >
-            ĐANG CHAT
-          </p>
-          <p
-            style={{
-              color:
-                active === "yeu_cau_chat"
-                  ? "rgb(63,81,181)"
-                  : "rgb(162,170,176)"
-            }}
-            onClick={this.requestClick}
-          >
-            YÊU CẦU CHAT
-          </p>
-          <p
-            style={{
-              color:
-                active === "ds_chan" ? "rgb(63,81,181)" : "rgb(162,170,176)"
-            }}
-            onClick={this.blockClick}
-          >
-            DS. CHẶN
-          </p>
-        </div>
+        {this.renderChatHeader()}
+        {this.renderTabBar(active)}
         <div className="divider" />
         {contentRender}
       </div>

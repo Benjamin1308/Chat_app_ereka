@@ -6,14 +6,14 @@ import tick from "../assets/tick.png";
 import error from "../assets/error.png";
 
 const MessageItem = props => {
-  const { message, type, id } = props.message;
+  const { message, type, id, time } = props.message;
   if (type === "receive") {
     return (
-      <div className="messageItem">
+      <div className="messageItem" onClick={props.handle}>
         <img src={avatar} alt="avatar" className="avatar" />
         <div className="msgInfo">
           <div className="msg">{message}</div>
-          <div className="time">{props.message.time}</div>
+          <div className="time">{time}</div>
         </div>
       </div>
     );
@@ -38,7 +38,7 @@ const MessageItem = props => {
       );
 
     return (
-      <div className="sendMessageItem">
+      <div className="sendMessageItem" onClick={props.handle}>
         <div
           className="msg"
           style={{

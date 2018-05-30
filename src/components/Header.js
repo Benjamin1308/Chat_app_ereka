@@ -16,7 +16,7 @@ const Header = (props) => {
   );
   return (
     <div className="header" style={{ backgroundColor: props.backgroundColor, color: props.color }}>
-      <a href="/#" onClick={history.goBack}>
+      <a onKeyDown={() => null} role="button" tabIndex={0} onClick={history.goBack}>
         <img className="back" src={props.back === 'dark' ? backDark : backWhite} alt="<" />
       </a>
 

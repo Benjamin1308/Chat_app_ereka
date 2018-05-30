@@ -20,13 +20,15 @@ export default class MessageScreen extends React.Component {
       messageSetting: false,
     };
   }
-  handleOption = () => {
+  handleOption = (e) => {
+    e.preventDefault();
     this.setState(prevState => ({
       messageSetting: false,
       messageOption: !prevState.messageOption,
     }));
   };
-  handleSetting = () => {
+  handleSetting = (e) => {
+    e.preventDefault();
     this.setState(prevState => ({
       messageOption: false,
       messageSetting: !prevState.messageSetting,

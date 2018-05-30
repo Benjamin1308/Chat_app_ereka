@@ -15,17 +15,20 @@ export default class ChatScreen extends React.Component {
       find: '',
     };
   }
-  chattingClick = () => {
+  chattingClick = (e) => {
+    e.preventDefault();
     this.setState({
       active: 'dang_chat',
     });
   };
-  requestClick = () => {
+  requestClick = (e) => {
+    e.preventDefault();
     this.setState({
       active: 'yeu_cau_chat',
     });
   };
-  blockClick = () => {
+  blockClick = (e) => {
+    e.preventDefault();
     this.setState({
       active: 'ds_chan',
     });

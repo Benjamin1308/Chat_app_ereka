@@ -1,5 +1,9 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ActivityIndicator from 'react-activity-indicator';
+import 'react-activity-indicator/src/activityindicator.css';
 import { connect } from 'react-redux';
 import LongButton from '../components/LongButton';
 import FBButton from '../components/FBButton';
@@ -8,37 +12,27 @@ import '../scss/FirstScreen.scss';
 import Header from '../components/Header';
 import '../scss/RegisterScreen.scss';
 import InputItem from '../components/InputItem';
-import { requestSignup, passOnboard } from '../actions/actionTypes';
+import { requestSignup } from '../actions/auth';
 
 class RegisterScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      repassword: '',
-    };
-  }
+  componentDidUpdate = () => {
+    if (this.props.error !== '') this.toastMsg(this.props.error);
+  };
+  toastMsg = msg => toast(msg, { autoClose: 2000 });
   handleUsername = (e) => {
-    this.setState({
-      username: e.target.value,
-    });
+    this.username = e.target.value;
   };
   handlePass = (e) => {
-    this.setState({
-      password: e.target.value,
-    });
+    this.password = e.target.value;
   };
   handleRePass = (e) => {
-    this.setState({
-      repassword: e.target.value,
-    });
+    this.repassword = e.target.value;
   };
   signUp = () => {
-    if (this.state.password === this.state.repassword) {
-      this.props.signup(this.state.username, this.state.password);
-      console.log('abc');
-    }
+    if (!this.password || !this.username || !this.repassword) {
+      this.toastMsg('Không được để trống');
+    } else if (this.password === this.repassword) this.props.signup(this.username, this.password);
+    else this.toastMsg('Mật khẩu không trùng khớp');
   };
   renderForm = () => (
     <form>
@@ -59,9 +53,8 @@ class RegisterScreen extends React.Component {
   );
   renderBtnPart = () => (
     <div className="btnPart">
-      <Link to="/registersuccess">
-        <LongButton content="Tiếp tục" backgroundColor="rgb(63,81,181)" onClick={this.signUp} />
-      </Link>
+      <LongButton content="Tiếp tục" backgroundColor="rgb(63,81,181)" onClick={this.signUp} />
+
       <FBButton content="Đăng ký bằng Facebook" />
       <p className="haveAcc">
         Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
@@ -69,6 +62,22 @@ class RegisterScreen extends React.Component {
     </div>
   );
   render() {
+    if (this.props.isLoggedIn) {
+      return <Redirect to="/registersuccess" />;
+    } else if (this.props.isLoggingIn) {
+      return (
+        <ActivityIndicator
+          className="loading"
+          number={3}
+          diameter={40}
+          borderWidth={1}
+          duration={300}
+          activeColor="#66D9EF"
+          borderColor="white"
+          borderRadius="50%"
+        />
+      );
+    }
     return (
       <div className="registerScreen">
         <Header
@@ -85,17 +94,20 @@ class RegisterScreen extends React.Component {
         </p>
         {this.renderForm()}
         {this.renderBtnPart()}
+        <ToastContainer />
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.token !== '',
+  error: state.auth.error,
+  isLoggingIn: state.auth.isLoggingIn,
+});
 const mapDispatchToProps = dispatch => ({
-  signup: (username, password) => {
-    dispatch(passOnboard());
-    dispatch(requestSignup(username, password));
-  },
+  signup: (username, password) => dispatch(requestSignup(username, password)),
 });
 
-export default connect(null,
+export default connect(mapStateToProps,
   mapDispatchToProps)(RegisterScreen);

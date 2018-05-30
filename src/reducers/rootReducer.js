@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 // import { persistReducer } from 'redux-persist';
 
-import login from './login';
-import onboard from './onboard';
+import auth from './auth';
 
 // const rootConfig = {
 //   key: 'root',
@@ -17,8 +16,7 @@ import onboard from './onboard';
 // };
 
 const rootReducer = combineReducers({
-  login,
-  onboard,
+  auth,
 });
 
 export default rootReducer;

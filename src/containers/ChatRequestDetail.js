@@ -59,8 +59,11 @@ export default class ChatRequestDetail extends React.Component {
               </div>
               <MessageItem
                 message={{
- message: 'lorem ipsum', type: 'receive', id: '1', time: '9.00 am',
-}}
+                  message: request.requestMessage,
+                  type: 'receive',
+                  id: request.id,
+                  time: request.requestTime,
+                }}
               />
             </div>
             <div className="option">
@@ -75,7 +78,7 @@ export default class ChatRequestDetail extends React.Component {
                   }}
                 />Chấp nhận
               </button>
-              <button className="button">
+              <button className="button r-btn">
                 <img
                   src={error}
                   alt="no"
@@ -86,7 +89,7 @@ export default class ChatRequestDetail extends React.Component {
                   }}
                 />Từ chối
               </button>
-              <span>Bỏ qua</span>
+              <span className="ignore">Bỏ qua</span>
             </div>
           </div>
         </div>

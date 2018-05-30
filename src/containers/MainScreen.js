@@ -7,6 +7,7 @@ import chatActive from '../assets/chatActive.png';
 import PlaceHolder from './PlaceHolder';
 import ChatScreen from './ChatScreen';
 import '../scss/MainScreen.scss';
+import LogoutScreen from './LogoutScreen';
 
 export default class MainScreen extends React.Component {
   static propTypes = {};
@@ -17,26 +18,31 @@ export default class MainScreen extends React.Component {
     };
   }
   homeClick = (e) => {
+    e.preventDefault();
     this.setState({
       tab: 'home',
     });
   };
-  topicClick = () => {
+  topicClick = (e) => {
+    e.preventDefault();
     this.setState({
       tab: 'topic',
     });
   };
-  profileClick = () => {
+  profileClick = (e) => {
+    e.preventDefault();
     this.setState({
       tab: 'profile',
     });
   };
-  chatClick = () => {
+  chatClick = (e) => {
+    e.preventDefault();
     this.setState({
       tab: 'chat',
     });
   };
-  postClick = () => {
+  postClick = (e) => {
+    e.preventDefault();
     this.setState({
       tab: 'post',
     });
@@ -92,7 +98,8 @@ export default class MainScreen extends React.Component {
   );
   render() {
     const { tab } = this.state;
-    const renderScreen = tab === 'chat' ? <ChatScreen /> : <PlaceHolder />;
+    let renderScreen = tab === 'chat' ? <ChatScreen /> : <PlaceHolder />;
+    if (tab === 'profile') renderScreen = <LogoutScreen />;
     return (
       <div>
         {renderScreen}

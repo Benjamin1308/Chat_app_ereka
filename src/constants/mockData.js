@@ -128,27 +128,27 @@ export const mockDataMessage = [
     status: 'error',
   },
   {
-    id: '2',
+    id: '6',
     type: 'receive',
     message:
       'Khi mà user chat làm nhiều dòng rồi ấn enter theo thói quen thì hệ thống tự hộp lại trong một hợp thoại',
     time: '09:16 am',
   },
   {
-    id: '3',
+    id: '7',
     type: 'send',
     message: 'Đây là nội dung chat của người dùng, không hiện avatar',
     status: 'seen',
   },
   {
-    id: '2',
+    id: '8',
     type: 'receive',
     message:
       'Khi mà user chat làm nhiều dòng rồi ấn enter theo thói quen thì hệ thống tự hộp lại trong một hợp thoại',
     time: '09:16 am',
   },
   {
-    id: '3',
+    id: '9',
     type: 'send',
     message: 'Đây là nội dung chat của người dùng, không hiện avatar',
     status: 'seen',

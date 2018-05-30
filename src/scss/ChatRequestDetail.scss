@@ -70,14 +70,22 @@
         }
       }
       .option {
-        margin-top: 65px;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
         font-size: 14px;
         color: rgb(63, 81, 181);
         .l-btn {
-          margin-left: -10px;
+          position: fixed;
+          bottom: 25px;
+          left: 15px;
+        }
+        .r-btn {
+          position: fixed;
+          bottom: 25px;
+          left: 160px;
+        }
+        .ignore {
+          position: fixed;
+          bottom: 30px;
+          right: 40px;
         }
         .button {
           color: rgb(63, 81, 181);

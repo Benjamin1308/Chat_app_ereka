@@ -1,6 +1,7 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import firebase from 'firebase';
-import { loginPending, loginSuccess, loginFail, LOGIN_REQUEST } from '../actions/actionTypes';
+import { LOGIN_REQUEST } from '../actions/actionTypes';
+import { loginPending, loginSuccess, loginFail } from '../actions/auth';
 
 function* authorizeWithFirebase({ payload }) {
   const { email, password } = payload;

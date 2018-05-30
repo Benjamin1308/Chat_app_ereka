@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 // import { persistReducer } from 'redux-persist';
 
 import auth from './auth';
-
+import users from './users';
 // const rootConfig = {
 //   key: 'root',
 //   storage: AsyncStorage,
@@ -17,6 +17,7 @@ import auth from './auth';
 
 const rootReducer = combineReducers({
   auth,
+  users,
 });
 
 export default rootReducer;

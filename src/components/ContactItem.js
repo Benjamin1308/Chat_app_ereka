@@ -4,9 +4,9 @@ import avatar from '../assets/avatar.png';
 
 const ContactItem = props => (
   <div className="contactItem">
-    <img src={avatar} alt="avatar" />
+    <img src={props.user.avatar} alt="avatar" />
     <span className="name">{props.user.name}</span>
-    <span className="description">{props.user.description}</span>
+    <span className="description">{props.user.position}</span>
   </div>
 );
 

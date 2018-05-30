@@ -1,36 +1,63 @@
 import { take, put, call, fork, cancelled, cancel } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import firebase from 'firebase';
-import { USER_ADDED, USERS_REQUEST, STOP_USERS_REQUEST } from '../actions/actionTypes';
+import { firestore } from '../constants/firebase';
+
+import {
+  USER_ADDED,
+  USER_CHANGED,
+  USERS_REQUEST,
+  STOP_USERS_REQUEST,
+  USER_REMOVED,
+} from '../actions/actionTypes';
 
 function createFetchUsersChannel() {
   return eventChannel((emit) => {
-    const usersRef = firebase.database().ref('users');
+    const usersRef = firestore.collection('users');
 
-    const friendAddHandler = (childSnapshot) => {
-      emit({ type: USER_ADDED, payload: { ...childSnapshot.val(), id: childSnapshot.key } });
-    };
+    const { uid } = firebase.auth().currentUser;
 
-    const addListener = usersRef.on('child_added', friendAddHandler);
+    const unsubscribe = usersRef.onSnapshot((snapshots) => {
+      snapshots.docChanges().forEach((change) => {
+        console.log(change.doc.id);
+        if (change.doc.id !== uid) {
+          if (change.type === 'added') {
+            emit({
+              type: USER_ADDED,
 
-    const unsubscribe = () => {
-      usersRef.off('child_added', addListener);
-    };
+              payload: { ...change.doc.data(), id: change.doc.id },
+            });
+          } else if (change.type === 'modified') {
+            emit({
+              type: USER_CHANGED,
+
+              payload: { ...change.doc.data(), id: change.doc.id },
+            });
+          } else if (change.type === 'removed') {
+            emit({
+              type: USER_REMOVED,
+
+              payload: { ...change.doc.data(), id: change.doc.id },
+            });
+          }
+        }
+      });
+    });
 
     return unsubscribe;
   });
 }
 
 function* watchUsersChannel() {
-  const friendsChannel = yield call(createFetchUsersChannel);
+  const usersChannel = yield call(createFetchUsersChannel);
   try {
     while (true) {
-      const action = yield take(friendsChannel);
+      const action = yield take(usersChannel);
       yield put(action);
     }
   } finally {
     if (yield cancelled()) {
-      friendsChannel.close();
+      usersChannel.close();
     }
   }
 }

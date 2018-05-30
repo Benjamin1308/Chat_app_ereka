@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import homeActive from '../assets/homeActive.png';
 import postActive from '../assets/postActive.png';
 import profileActive from '../assets/profileActive.png';
@@ -8,8 +9,9 @@ import PlaceHolder from './PlaceHolder';
 import ChatScreen from './ChatScreen';
 import '../scss/MainScreen.scss';
 import LogoutScreen from './LogoutScreen';
+import { requestUsers, stopRequestUsers } from '../actions/users';
 
-export default class MainScreen extends React.Component {
+class MainScreen extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
@@ -17,6 +19,12 @@ export default class MainScreen extends React.Component {
       tab: 'chat',
     };
   }
+  componentDidMount = () => {
+    this.props.requestUsers();
+  };
+  componentWillUnmount = () => {
+    this.props.stopRequestUsers();
+  };
   homeClick = (e) => {
     e.preventDefault();
     this.setState({
@@ -108,3 +116,11 @@ export default class MainScreen extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  requestUsers: () => dispatch(requestUsers()),
+  stopRequestUsers: () => dispatch(stopRequestUsers()),
+});
+
+export default connect(null,
+  mapDispatchToProps)(MainScreen);

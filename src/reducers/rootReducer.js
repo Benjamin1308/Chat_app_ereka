@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import auth from './auth';
 import users from './users';
+import chats from './chats';
 // const rootConfig = {
 //   key: 'root',
 //   storage: AsyncStorage,
@@ -18,6 +19,7 @@ import users from './users';
 const rootReducer = combineReducers({
   auth,
   users,
+  chats,
 });
 
 export default rootReducer;

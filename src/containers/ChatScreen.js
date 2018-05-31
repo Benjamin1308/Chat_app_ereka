@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import newChat from '../assets/newChat.png';
 import '../scss/ChatScreen.scss';
-import { mockDataChatMessage, mockDataChatRequest, mockDataBlock } from '../constants/mockData';
+import { mockDataBlock } from '../constants/mockData';
 import VerticalList from '../components/VerticalList';
 import FindComponent from '../components/FindComponent';
 
-export default class ChatScreen extends React.Component {
+class ChatScreen extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
@@ -91,30 +92,30 @@ export default class ChatScreen extends React.Component {
       </div>
     );
     if (active === 'dang_chat') {
-      if (mockDataChatRequest.length > 0) {
+      if (this.props.pendingChats.length > 0) {
         contentRender = (
           <div className="contentRender">
             <div className="chatReqHeader">
               <div>Yêu cầu chat</div>
-              <div className="numberOfReq">{mockDataChatRequest.length}</div>
+              <div className="numberOfReq">{this.props.pendingChats.length}</div>
             </div>
-            <VerticalList type="request" list={[mockDataChatRequest[0]]} />
+            <VerticalList type="request" list={[this.props.pendingChats[0]]} />
             <div className="chattingHeader">
               <div>Đang chat</div>
             </div>
-            <VerticalList type="chat" list={mockDataChatMessage} />
+            <VerticalList type="chat" list={this.props.activeChats} />
           </div>
         );
-      } else contentRender = <VerticalList type="chat" list={mockDataChatMessage} />;
+      } else contentRender = <VerticalList type="chat" list={this.props.activeChats} />;
     } else if (active === 'yeu_cau_chat') {
       contentRender = (
         <div className="contentRender">
           <div className="noOfReq">
             <div className="noOfReqMsg">
-              Bạn nhận được {mockDataChatRequest.length} yêu cầu chat
+              Bạn nhận được {this.props.pendingChats.length} yêu cầu chat
             </div>
           </div>
-          <VerticalList type="request" list={mockDataChatRequest} />
+          <VerticalList type="request" list={this.props.pendingChats} />
         </div>
       );
     }
@@ -128,3 +129,11 @@ export default class ChatScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  activeChats: state.chats.activeChats,
+  pendingChats: state.chats.pendingChats,
+});
+
+export default connect(mapStateToProps,
+  null)(ChatScreen);

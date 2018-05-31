@@ -15,11 +15,10 @@ function createFetchUsersChannel() {
   return eventChannel((emit) => {
     const usersRef = firestore.collection('users');
 
-    const { uid } = firebase.auth().currentUser;
+    const { uid } = firebase.auth().currentUser || '';
 
     const unsubscribe = usersRef.onSnapshot((snapshots) => {
       snapshots.docChanges().forEach((change) => {
-        console.log(change.doc.id);
         if (change.doc.id !== uid) {
           if (change.type === 'added') {
             emit({

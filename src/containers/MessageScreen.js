@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import VerticalList from '../components/VerticalList';
 import { mockDataMessage } from '../constants/mockData';
@@ -7,18 +8,25 @@ import chatSend from '../assets/chatSend.png';
 import '../scss/MessageScreen.scss';
 import MessageOption from '../components/MessageOption';
 import MessageSetting from '../components/MessageSetting';
+import { requestMsg, stopRequestMsg } from '../actions/chats';
 
 const propTypes = {};
 
 const defaultProps = {};
 
-export default class MessageScreen extends React.Component {
+class MessageScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messageOption: false,
       messageSetting: false,
     };
+  }
+  componentDidMount() {
+    this.props.requestMsg(this.props.match.params.id);
+  }
+  componentWillUnmount() {
+    this.props.stopRequestMsg();
   }
   handleOption = (e) => {
     e.preventDefault();
@@ -35,6 +43,9 @@ export default class MessageScreen extends React.Component {
     }));
   };
   render() {
+    const { id } = this.props.match.params;
+    const user = this.props.users.filter(item => item.id === id);
+
     const input = (
       <div className="inputContainer">
         <input className="chat" placeholder="Nhập nội dung chat" />
@@ -49,7 +60,7 @@ export default class MessageScreen extends React.Component {
     return (
       <div className="messageScreen">
         <Header
-          title="Nguyễn Tuấn Anh"
+          title={user.name}
           backgroundColor="rgb(63, 81, 181)"
           color="white"
           align="left"
@@ -57,7 +68,7 @@ export default class MessageScreen extends React.Component {
           option={this.handleSetting}
         />
         <div className="messageContainer">
-          <VerticalList type="message" list={mockDataMessage} handle={this.handleOption} />
+          <VerticalList type="message" list={this.props.chats} handle={this.handleOption} />
         </div>
         {footer}
       </div>
@@ -67,3 +78,15 @@ export default class MessageScreen extends React.Component {
 
 MessageScreen.propTypes = propTypes;
 MessageScreen.defaultProps = defaultProps;
+
+const mapStateToProps = state => ({
+  users: state.users,
+  chats: state.chats.chats,
+});
+const mapDispatchToProps = dispatch => ({
+  requestMsg: id => dispatch(requestMsg(id)),
+  stopRequestMsg: () => dispatch(stopRequestMsg()),
+});
+
+export default connect(mapStateToProps,
+  mapDispatchToProps)(MessageScreen);

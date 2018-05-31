@@ -25,15 +25,28 @@ class CreateNewChat extends React.Component {
         insert.data.push(user);
       } else sections.push({ title: user.name[0], data: [user] });
     });
-    for (let i = 0; i < sections.length - 1; i += 1) {
-      for (let j = 1; j < sections.length; j += 1) {
-        if (sections[i].title > sections[j].title) {
-          const tmp = sections[i];
-          sections[i] = sections[j];
-          sections[j] = tmp;
-        }
-      }
-    }
+    sections.sort();
+    sections.reverse();
+
+    const renderContact = (
+      <div>
+        {sections.map(section => (
+          <div key={section.data[0].id}>
+            <p
+              style={{
+                margin: '15px',
+                fontSize: '14px',
+                color: 'rgb(48, 49, 55)',
+                textTransform: 'uppercase',
+              }}
+            >
+              {section.title}
+            </p>
+            <VerticalList list={section.data} type="contact" />
+          </div>
+        ))}
+      </div>
+    );
     return (
       <div className="createNewChat">
         <Header
@@ -44,8 +57,7 @@ class CreateNewChat extends React.Component {
           back="white"
         />
         <FindComponent value={this.state.find} placeholder="nhập tên người muốn chat" />
-        <p style={{ margin: '15px', fontSize: '14px', color: 'rgb(48, 49, 55)' }}>A</p>
-        <VerticalList list={this.props.users} type="contact" />
+        {renderContact}
       </div>
     );
   }

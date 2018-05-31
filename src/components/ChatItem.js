@@ -8,11 +8,13 @@ import error from '../assets/error.png';
 
 const ChatItem = (props) => {
   const {
-    avatar, name, id, time, body, status,
+    avatar, name, time, lastMsg, status,
   } = props.chat;
   let statusSymbol = <img src={error} alt="tick" style={{ width: '8px' }} />;
   if (status === 'MSG_SENT') statusSymbol = <img src={tick} alt="tick" style={{ width: '9px' }} />;
-  else if (status === 'MSG_SEEN') { statusSymbol = <img src={doubletick} alt="tick" style={{ width: '13.8px' }} />; }
+  else if (status === 'MSG_SEEN') {
+    statusSymbol = <img src={doubletick} alt="tick" style={{ width: '13.8px' }} />;
+  }
   const statusRender = status === 'MSG_PENDING' ? <span /> : statusSymbol;
   return (
     <Link to="/message">
@@ -37,7 +39,7 @@ const ChatItem = (props) => {
             }}
           >
             {statusRender}
-            {` ${body}`}
+            {` ${lastMsg}`}
           </div>
         </div>
       </div>

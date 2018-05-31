@@ -20,7 +20,7 @@ const App = () => (
     <Route path="/main" component={MainScreen} />
     <Route path="/stop-block/:name" component={StopBlockScreen} />
     <Route path="/request-detail/:id" component={ChatRequestDetail} />
-    <Route path="/message" component={MessageScreen} />
+    <Route path="/message/:id" component={MessageScreen} />
     <Route path="/new-chat" component={CreateNewChat} />
   </Switch>
 );

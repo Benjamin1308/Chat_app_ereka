@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import avatar from '../assets/avatar.png';
+import defaultAvatar from '../assets/avatar.png';
 import tick from '../assets/thintick.png';
 import error from '../assets/checkNo.png';
 import '../scss/RequestItem.scss';
 
 const RequestItem = (props) => {
-  const { name, id, requestTime } = props.request;
+  const {
+    name, id, requestTime, avatar,
+  } = props.request;
   return (
     <div className="requestItem">
       <Link to={`/request-detail/${id}`}>
         <div className="reqInfo">
-          <img className="avatar" src={avatar} alt="avatar" />
+          <img className="avatar" src={defaultAvatar || avatar} alt="avatar" />
           <div className="reqDetail">
             <div>
               <span className="name">{`${name} `}</span>
               <span className="saying">muốn được chat với bạn</span>
             </div>
-            <div className="time">{requestTime}</div>
+            <div className="time">{requestTime || '9.00 am'}</div>
           </div>
         </div>
       </Link>

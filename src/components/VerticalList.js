@@ -34,7 +34,6 @@ export default class VerticalList extends React.PureComponent {
   };
   render() {
     const { type, list } = this.props;
-    console.log(list);
     const renderList = this.chooseRenderList(type, list);
     return <div>{renderList}</div>;
   }

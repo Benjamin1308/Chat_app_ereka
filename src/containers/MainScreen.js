@@ -10,6 +10,12 @@ import ChatScreen from './ChatScreen';
 import '../scss/MainScreen.scss';
 import LogoutScreen from './LogoutScreen';
 import { requestUsers, stopRequestUsers } from '../actions/users';
+import {
+  requestActiveChats,
+  stopRequestActiveChats,
+  requestPendingChats,
+  stopRequestPendingChats,
+} from '../actions/chats';
 
 class MainScreen extends React.Component {
   static propTypes = {};
@@ -21,9 +27,13 @@ class MainScreen extends React.Component {
   }
   componentDidMount = () => {
     this.props.requestUsers();
+    this.props.requestActiveChats();
+    this.props.requestPendingChats();
   };
   componentWillUnmount = () => {
     this.props.stopRequestUsers();
+    this.props.stopRequestActiveChats();
+    this.props.stopRequestPendingChats();
   };
   homeClick = (e) => {
     e.preventDefault();
@@ -120,6 +130,10 @@ class MainScreen extends React.Component {
 const mapDispatchToProps = dispatch => ({
   requestUsers: () => dispatch(requestUsers()),
   stopRequestUsers: () => dispatch(stopRequestUsers()),
+  requestActiveChats: () => dispatch(requestActiveChats()),
+  stopRequestActiveChats: () => dispatch(stopRequestActiveChats()),
+  requestPendingChats: () => dispatch(requestPendingChats()),
+  stopRequestPendingChats: () => dispatch(stopRequestPendingChats()),
 });
 
 export default connect(null,

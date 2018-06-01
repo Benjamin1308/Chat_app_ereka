@@ -10,7 +10,6 @@ import {
 const initialState = {
   isLoggingIn: false,
   token: '',
-  username: '',
   error: '',
 };
 
@@ -20,10 +19,11 @@ const auth = (state = initialState, action) => {
     case LOGIN_PENDING:
       return { ...state, isLoggingIn: true };
     case LOGIN_SUCCESS:
+      console.log(payload);
       return {
+        ...state,
         isLoggingIn: false,
-        token: payload.token,
-        username: payload.username,
+        token: payload,
       };
     case LOGIN_FAIL:
       return { ...state, error: payload, isLoggingIn: false };
@@ -35,7 +35,7 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         token: '',
-        username: '',
+
         error: '',
       };
     default:

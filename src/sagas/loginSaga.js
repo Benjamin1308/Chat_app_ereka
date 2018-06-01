@@ -14,9 +14,10 @@ function* authorizeWithFirebase({ payload }) {
       email, // arguments are passed seperately
       password,
     );
-    const usernameRef = firebase.database().ref(`users/${user.uid}/name`);
-    const dataSnapshot = yield call([usernameRef, usernameRef.once], 'value');
-    yield put(loginSuccess(user.uid, dataSnapshot.val()));
+    // const usernameRef = firebase.database().ref(`users/${user.uid}`);
+    // const dataSnapshot = yield call([usernameRef, usernameRef.once], 'value');
+    // console.log(dataSnapshot.val());
+    yield put(loginSuccess(user.uid));
   } catch (e) {
     yield put(loginFail(e.message));
   }

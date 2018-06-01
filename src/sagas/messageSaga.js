@@ -12,12 +12,12 @@ function createFetchMsgChannel(id) {
     const { uid } = firebase.auth().currentUser || '';
     const id1 = uid < id ? uid : id;
     const id2 = uid > id ? uid : id;
-    console.log(`${id1}-${id2}`);
-    const usersRef = firestore.collection(`activeChats/${id1}-${id2}/messages`);
+    const usersRef = firestore
+      .collection(`chats/${id1}-${id2}/messages`)
+      .orderBy('timestamp', 'asc');
 
     const unsubscribe = usersRef.onSnapshot((snapshots) => {
       snapshots.docChanges().forEach((change) => {
-        console.log(change.doc);
         if (change.type === 'added') {
           emit({
             type: MSG_ADDED,

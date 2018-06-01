@@ -11,9 +11,9 @@ import {
 
 export const loginPending = () => ({ type: LOGIN_PENDING });
 
-export const loginSuccess = (token, username) => ({
+export const loginSuccess = token => ({
   type: LOGIN_SUCCESS,
-  payload: { token, username },
+  payload: token,
 });
 
 export const requestLogin = (email, password) => ({

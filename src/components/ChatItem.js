@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import avatarDefault from '../assets/avatar.png';
 import '../scss/ChatItem.scss';
@@ -8,8 +9,11 @@ import error from '../assets/error.png';
 
 const ChatItem = (props) => {
   const {
-    avatar, name, time, lastMsg, status,
+    avatar, name, time, lastMsg, status, id,
   } = props.chat;
+  const { uid } = firebase.auth().currentUser;
+  const idArr = id.split('-');
+  const partnerId = uid === idArr[0] ? idArr[1] : idArr[0];
   let statusSymbol = <img src={error} alt="tick" style={{ width: '8px' }} />;
   if (status === 'MSG_SENT') statusSymbol = <img src={tick} alt="tick" style={{ width: '9px' }} />;
   else if (status === 'MSG_SEEN') {
@@ -17,7 +21,7 @@ const ChatItem = (props) => {
   }
   const statusRender = status === 'MSG_PENDING' ? <span /> : statusSymbol;
   return (
-    <Link to="/message">
+    <Link to={`/message/${partnerId}`}>
       <div className="chatItem">
         <img className="avatar" src={avatar || avatarDefault} alt="avatar" />
         <div className="msgContainer">

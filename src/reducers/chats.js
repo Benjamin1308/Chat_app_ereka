@@ -37,7 +37,11 @@ const chats = (state = initialState, action) => {
         pendingChats: state.pendingChats.filter(chat => chat.id !== payload.id),
       };
     case MSG_ADDED:
-      return { ...state, chats: [...state.chats, payload] };
+      console.log(state.chats);
+      return {
+        ...state,
+        chats: [...state.chats, payload],
+      };
     case MSG_REMOVED:
       return {
         ...state,

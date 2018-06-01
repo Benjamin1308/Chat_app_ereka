@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 import homeActive from '../assets/homeActive.png';
 import postActive from '../assets/postActive.png';
 import profileActive from '../assets/profileActive.png';
@@ -16,6 +18,7 @@ import {
   requestPendingChats,
   stopRequestPendingChats,
 } from '../actions/chats';
+import { loginSuccess, logout } from '../actions/auth';
 
 class MainScreen extends React.Component {
   static propTypes = {};
@@ -115,6 +118,10 @@ class MainScreen extends React.Component {
     </ul>
   );
   render() {
+    if (!this.props.isLoggedIn) {
+      return <Redirect to="login" />;
+    }
+
     const { tab } = this.state;
     let renderScreen = tab === 'chat' ? <ChatScreen /> : <PlaceHolder />;
     if (tab === 'profile') renderScreen = <LogoutScreen />;
@@ -127,6 +134,9 @@ class MainScreen extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.token !== '',
+});
 const mapDispatchToProps = dispatch => ({
   requestUsers: () => dispatch(requestUsers()),
   stopRequestUsers: () => dispatch(stopRequestUsers()),
@@ -134,7 +144,9 @@ const mapDispatchToProps = dispatch => ({
   stopRequestActiveChats: () => dispatch(stopRequestActiveChats()),
   requestPendingChats: () => dispatch(requestPendingChats()),
   stopRequestPendingChats: () => dispatch(stopRequestPendingChats()),
+  loginSuccess: id => dispatch(loginSuccess(id)),
+  logout: () => dispatch(logout()),
 });
 
-export default connect(null,
+export default connect(mapStateToProps,
   mapDispatchToProps)(MainScreen);

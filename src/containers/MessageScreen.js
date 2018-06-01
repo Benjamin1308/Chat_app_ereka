@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
+import { firestore } from '../constants/firebase';
 import Header from '../components/Header';
 import VerticalList from '../components/VerticalList';
 import { mockDataMessage } from '../constants/mockData';
@@ -20,8 +22,10 @@ class MessageScreen extends React.Component {
     this.state = {
       messageOption: false,
       messageSetting: false,
+      msgContent: '',
     };
   }
+
   componentDidMount() {
     this.props.requestMsg(this.props.match.params.id);
   }
@@ -42,14 +46,53 @@ class MessageScreen extends React.Component {
       messageSetting: !prevState.messageSetting,
     }));
   };
+  handleChange = (e) => {
+    this.setState({
+      msgContent: e.target.value,
+    });
+  };
+
+  handleSend = (e) => {
+    e.preventDefault();
+    if (this.state.msgContent !== '') {
+      const { id } = this.props.match.params;
+      const { uid } = firebase.auth().currentUser;
+      const id1 = uid < id ? uid : id;
+      const id2 = uid > id ? uid : id;
+
+      console.log('send');
+      firestore
+        .collection(`chats/${id1}-${id2}/messages`)
+        .add({
+          body: this.state.msgContent,
+          seen: false,
+          senderId: uid,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          this.setState({
+            msgContent: '',
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   render() {
     const { id } = this.props.match.params;
-    const user = this.props.users.filter(item => item.id === id);
-
+    const user = this.props.users.find(item => item.id === id);
     const input = (
       <div className="inputContainer">
-        <input className="chat" placeholder="Nhập nội dung chat" />
-        <img src={chatSend} alt="Send" className="send" />
+        <input
+          className="chat"
+          placeholder="Nhập nội dung chat"
+          onChange={this.handleChange}
+          value={this.state.msgContent}
+        />
+        <a href="/#" onClick={this.handleSend}>
+          <img src={chatSend} alt="Send" className="send" />
+        </a>
       </div>
     );
     let footer = input;

@@ -10,14 +10,15 @@ import StopBlockScreen from './containers/StopBlockScreen';
 import ChatRequestDetail from './containers/ChatRequestDetail';
 import MessageScreen from './containers/MessageScreen';
 import CreateNewChat from './containers/CreateNewChat';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => (
   <Switch>
     <Route exact path="/" component={FirstScreen} />
     <Route path="/register" component={RegisterScreen} />
     <Route path="/login" component={LoginScreen} />
-    <Route path="/registersuccess" component={RegisterSuccess} />
-    <Route path="/main" component={MainScreen} />
+    <PrivateRoute path="/registersuccess" component={RegisterSuccess} />
+    <PrivateRoute path="/main" component={MainScreen} />
     <Route path="/stop-block/:name" component={StopBlockScreen} />
     <Route path="/request-detail/:id" component={ChatRequestDetail} />
     <Route path="/message/:id" component={MessageScreen} />

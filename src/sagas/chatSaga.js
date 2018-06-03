@@ -1,4 +1,4 @@
-import { take, put, call, fork, cancelled, cancel } from 'redux-saga/effects';
+import { take, put, call, fork, cancelled, cancel, takeLatest } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import firebase from 'firebase';
 import { firestore } from '../constants/firebase';
@@ -65,13 +65,19 @@ function* watchActiveChatsChannel() {
   }
 }
 
-export function* watchActiveChat() {
-  yield take(ACTIVE_CHAT_REQUEST);
+function* watchActiveChat(action) {
   const task = yield fork(watchActiveChatsChannel);
-  yield take(STOP_ACTIVE_CHAT_REQUEST);
-  yield cancel(task);
+  try {
+    yield take(STOP_ACTIVE_CHAT_REQUEST);
+    yield cancel(task);
+  } finally {
+    yield cancel(task);
+  }
 }
 
+export function* watchFetchActiveChatRequest() {
+  yield takeLatest(ACTIVE_CHAT_REQUEST, watchActiveChat);
+}
 // Pending Chat
 
 function createFetchPendingChatsChannel() {
@@ -113,9 +119,16 @@ function* watchPendingChatsChannel() {
   }
 }
 
-export function* watchPendingChat() {
-  yield take(PENDING_CHAT_REQUEST);
+function* watchPendingChat(action) {
   const task = yield fork(watchPendingChatsChannel);
-  yield take(STOP_PENDING_CHAT_REQUEST);
-  yield cancel(task);
+  try {
+    yield take(STOP_PENDING_CHAT_REQUEST);
+    yield cancel(task);
+  } finally {
+    yield cancel(task);
+  }
+}
+
+export function* watchFetchPendingChatRequest() {
+  yield takeLatest(PENDING_CHAT_REQUEST, watchPendingChat);
 }

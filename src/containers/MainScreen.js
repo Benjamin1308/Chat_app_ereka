@@ -20,7 +20,7 @@ import {
 } from '../actions/chats';
 import { loginSuccess, logout } from '../actions/auth';
 
-class MainScreen extends React.Component {
+export default class MainScreen extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
@@ -28,50 +28,17 @@ class MainScreen extends React.Component {
       tab: 'chat',
     };
   }
-  componentDidMount = () => {
-    this.props.requestUsers();
-    this.props.requestActiveChats();
-    this.props.requestPendingChats();
-  };
-  componentWillUnmount = () => {
-    this.props.stopRequestUsers();
-    this.props.stopRequestActiveChats();
-    this.props.stopRequestPendingChats();
-  };
-  homeClick = (e) => {
+
+  tabClick = (e, tab) => {
     e.preventDefault();
     this.setState({
-      tab: 'home',
-    });
-  };
-  topicClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      tab: 'topic',
-    });
-  };
-  profileClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      tab: 'profile',
-    });
-  };
-  chatClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      tab: 'chat',
-    });
-  };
-  postClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      tab: 'post',
+      tab,
     });
   };
   renderNavbar = tab => (
     <ul className="navi-bar">
       <li>
-        <a href="/#" onClick={this.homeClick}>
+        <a href="/#" onClick={e => this.tabClick(e, 'home')}>
           <img
             className="nav-item"
             style={{ opacity: tab !== 'home' ? '0.2' : '1' }}
@@ -81,7 +48,7 @@ class MainScreen extends React.Component {
         </a>
       </li>
       <li>
-        <a href="/#" onClick={this.topicClick}>
+        <a href="/#" onClick={e => this.tabClick(e, 'topic')}>
           <img
             className="nav-item"
             style={{ opacity: tab !== 'topic' ? '0.2' : '1' }}
@@ -91,12 +58,12 @@ class MainScreen extends React.Component {
         </a>
       </li>
       <li>
-        <a href="/#" onClick={this.postClick}>
+        <a href="/#" onClick={e => this.tabClick(e, 'post')}>
           <img className="post-item" src={postActive} alt="post" />
         </a>
       </li>
       <li>
-        <a href="/#" onClick={this.chatClick}>
+        <a href="/#" onClick={e => this.tabClick(e, 'chat')}>
           <img
             className="nav-item"
             style={{ opacity: tab !== 'chat' ? '0.2' : '1' }}
@@ -106,7 +73,7 @@ class MainScreen extends React.Component {
         </a>
       </li>
       <li>
-        <a href="/#" onClick={this.profileClick}>
+        <a href="/#" onClick={e => this.tabClick(e, 'profile')}>
           <img
             className="nav-item"
             style={{ opacity: tab !== 'profile' ? '0.2' : '1' }}
@@ -118,10 +85,6 @@ class MainScreen extends React.Component {
     </ul>
   );
   render() {
-    if (!this.props.isLoggedIn) {
-      return <Redirect to="login" />;
-    }
-
     const { tab } = this.state;
     let renderScreen = tab === 'chat' ? <ChatScreen /> : <PlaceHolder />;
     if (tab === 'profile') renderScreen = <LogoutScreen />;
@@ -133,20 +96,3 @@ class MainScreen extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  isLoggedIn: state.auth.token !== '',
-});
-const mapDispatchToProps = dispatch => ({
-  requestUsers: () => dispatch(requestUsers()),
-  stopRequestUsers: () => dispatch(stopRequestUsers()),
-  requestActiveChats: () => dispatch(requestActiveChats()),
-  stopRequestActiveChats: () => dispatch(stopRequestActiveChats()),
-  requestPendingChats: () => dispatch(requestPendingChats()),
-  stopRequestPendingChats: () => dispatch(stopRequestPendingChats()),
-  loginSuccess: id => dispatch(loginSuccess(id)),
-  logout: () => dispatch(logout()),
-});
-
-export default connect(mapStateToProps,
-  mapDispatchToProps)(MainScreen);

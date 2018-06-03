@@ -31,7 +31,8 @@ class LoginScreen extends React.Component {
   toastMsg = msg => toast(msg, { autoClose: 2000 });
   render() {
     console.log(this.props.isLoggedIn);
-    if (this.props.isLoggedIn) return <Redirect to="/main" />;
+    const { from } = this.props.location.state || { from: { pathname: '/main' } };
+    if (this.props.isLoggedIn) return <Redirect to={from} />;
     else if (this.props.isLoggingIn) {
       return (
         <ActivityIndicator

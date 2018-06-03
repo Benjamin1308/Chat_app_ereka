@@ -8,7 +8,6 @@ import error from '../assets/error.png';
 
 const MessageItem = (props) => {
   const { uid } = firebase.auth().currentUser;
-  console.log(props.message);
   const {
     body, timestamp, senderId, seen,
   } = props.message;

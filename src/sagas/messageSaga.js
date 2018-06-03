@@ -1,4 +1,4 @@
-import { take, put, call, fork, cancelled, cancel } from 'redux-saga/effects';
+import { take, put, call, fork, cancelled, cancel, takeLatest } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import firebase from 'firebase';
 import { firestore } from '../constants/firebase';
@@ -15,7 +15,7 @@ function createFetchMsgChannel(id) {
     const usersRef = firestore
       .collection(`chats/${id1}-${id2}/messages`)
       .orderBy('timestamp', 'asc');
-
+    console.log(`${id1}-${id2}`);
     const unsubscribe = usersRef.onSnapshot((snapshots) => {
       snapshots.docChanges().forEach((change) => {
         if (change.type === 'added') {
@@ -51,10 +51,16 @@ function* watchMsgChannel(id) {
   }
 }
 
-export default function* watchMsg() {
-  const { payload } = yield take(MSG_REQUEST);
-  console.log(payload);
-  const task = yield fork(watchMsgChannel, payload);
-  yield take(STOP_MSG_REQUEST);
-  yield cancel(task);
+function* watchMsg(action) {
+  const task = yield fork(watchMsgChannel, action.payload);
+  try {
+    yield take(STOP_MSG_REQUEST);
+    yield cancel(task);
+  } finally {
+    yield cancel(task);
+  }
+}
+
+export default function* watchFetchChatMessageRequest() {
+  yield takeLatest(MSG_REQUEST, watchMsg);
 }

@@ -1,11 +1,14 @@
 import {
+  ACTIVE_CHAT_REQUEST,
   ACTIVE_CHAT_ADDED,
   ACTIVE_CHAT_CHANGED,
   ACTIVE_CHAT_REMOVED,
+  PENDING_CHAT_REQUEST,
   PENDING_CHAT_ADDED,
   PENDING_CHAT_REMOVED,
   MSG_ADDED,
   MSG_REMOVED,
+  MSG_REQUEST,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -17,6 +20,8 @@ const initialState = {
 const chats = (state = initialState, action) => {
   const { payload } = action;
   switch (action.type) {
+    case ACTIVE_CHAT_REQUEST:
+      return { ...state, activeChats: [] };
     case ACTIVE_CHAT_ADDED:
       return { ...state, activeChats: [...state.activeChats, payload] };
     case ACTIVE_CHAT_CHANGED:
@@ -29,12 +34,20 @@ const chats = (state = initialState, action) => {
         ...state,
         activeChats: state.activeChats.filter(chat => chat.id !== payload.id),
       };
+    case PENDING_CHAT_REQUEST:
+      return { ...state, pendingChats: [] };
     case PENDING_CHAT_ADDED:
       return { ...state, pendingChats: [...state.pendingChats, payload] };
     case PENDING_CHAT_REMOVED:
       return {
         ...state,
         pendingChats: state.pendingChats.filter(chat => chat.id !== payload.id),
+      };
+    case MSG_REQUEST:
+      console.log(state.chats);
+      return {
+        ...state,
+        chats: [],
       };
     case MSG_ADDED:
       console.log(state.chats);

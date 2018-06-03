@@ -6,32 +6,37 @@ import '../scss/ChatScreen.scss';
 import { mockDataBlock } from '../constants/mockData';
 import VerticalList from '../components/VerticalList';
 import FindComponent from '../components/FindComponent';
+import { requestUsers, stopRequestUsers } from '../actions/users';
+import {
+  requestActiveChats,
+  stopRequestActiveChats,
+  requestPendingChats,
+  stopRequestPendingChats,
+} from '../actions/chats';
 
 class ChatScreen extends React.Component {
   static propTypes = {};
   constructor(props) {
     super(props);
     this.state = {
-      active: 'dang_chat',
+      active: 'activeChat',
       find: '',
     };
   }
-  chattingClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      active: 'dang_chat',
-    });
+  componentDidMount = () => {
+    this.props.requestUsers();
+    this.props.requestActiveChats();
+    this.props.requestPendingChats();
   };
-  requestClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      active: 'yeu_cau_chat',
-    });
+  componentWillUnmount = () => {
+    this.props.stopRequestUsers();
+    this.props.stopRequestActiveChats();
+    this.props.stopRequestPendingChats();
   };
-  blockClick = (e) => {
+  tabActivate = (e, active) => {
     e.preventDefault();
     this.setState({
-      active: 'ds_chan',
+      active,
     });
   };
   handleChange = (e) => {
@@ -44,27 +49,27 @@ class ChatScreen extends React.Component {
       <a
         href="/#"
         style={{
-          color: active === 'dang_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+          color: active === 'activeChat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
-        onClick={this.chattingClick}
+        onClick={e => this.tabActivate(e, 'activeChat')}
       >
         ĐANG CHAT
       </a>
       <a
         href="/#"
         style={{
-          color: active === 'yeu_cau_chat' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+          color: active === 'chatRequest' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
-        onClick={this.requestClick}
+        onClick={e => this.tabActivate(e, 'chatRequest')}
       >
         YÊU CẦU CHAT
       </a>
       <a
         href="/#"
         style={{
-          color: active === 'ds_chan' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
+          color: active === 'blockList' ? 'rgb(63,81,181)' : 'rgb(162,170,176)',
         }}
-        onClick={this.blockClick}
+        onClick={e => this.tabActivate(e, 'blockList')}
       >
         DS. CHẶN
       </a>
@@ -91,7 +96,7 @@ class ChatScreen extends React.Component {
         <VerticalList type="block" list={mockDataBlock} />
       </div>
     );
-    if (active === 'dang_chat') {
+    if (active === 'activeChat') {
       if (this.props.pendingChats.length > 0) {
         contentRender = (
           <div className="contentRender">
@@ -107,7 +112,7 @@ class ChatScreen extends React.Component {
           </div>
         );
       } else contentRender = <VerticalList type="chat" list={this.props.activeChats} />;
-    } else if (active === 'yeu_cau_chat') {
+    } else if (active === 'chatRequest') {
       contentRender = (
         <div className="contentRender">
           <div className="noOfReq">
@@ -135,5 +140,14 @@ const mapStateToProps = state => ({
   pendingChats: state.chats.pendingChats,
 });
 
+const mapDispatchToProps = dispatch => ({
+  requestUsers: () => dispatch(requestUsers()),
+  stopRequestUsers: () => dispatch(stopRequestUsers()),
+  requestActiveChats: () => dispatch(requestActiveChats()),
+  stopRequestActiveChats: () => dispatch(stopRequestActiveChats()),
+  requestPendingChats: () => dispatch(requestPendingChats()),
+  stopRequestPendingChats: () => dispatch(stopRequestPendingChats()),
+});
+
 export default connect(mapStateToProps,
-  null)(ChatScreen);
+  mapDispatchToProps)(ChatScreen);
